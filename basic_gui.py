@@ -1,5 +1,4 @@
-import PySimpleGUI as sg                       
-
+import PySimpleGUI as sg                  
 import pytest
 layout = [ 
      [sg.Text("Welcome to my project , for this excerise I decided to test the Chicago Transit Authority API \n Like most useful APIs this requires an API key, this can be retrived easily from CTA's website")] ,    
@@ -24,13 +23,18 @@ window = sg.Window('CTA Tests Runner', layout)      # Part 3 - Window Defintion
 # Do something with the information gathered
 
 
+class MyPlugin:
+    def pytest_sessionfinish(self):
+        print("*** test run reporting finishing")
+
+
 # Display and interact with the Window using an Event Loop
 while True:
     event, values = window.read()
     # See if user wants to quit or window was closed
     if event == "Run Test":
-      retcode = pytest.main(["-s",  "-x","pytests","--api_key","aaa"])
-      print(retcode)
+      retcode = pytest.main(["-s",  "-x","pytests","--api_key","aaa"], plugins=[MyPlugin()])
+      print( vars(retcode)) 
       window.refresh()
     
     if event == sg.WINDOW_CLOSED or event == 'Quit':
