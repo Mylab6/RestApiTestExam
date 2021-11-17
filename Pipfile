@@ -16,3 +16,4 @@ python_version = "3.10"
 
 [scripts]
 basic_gui = "python basic_gui.py"
+run_tests = "pytest -s -x pytests"

@@ -26,6 +26,10 @@ window = sg.Window('CTA Tests Runner', layout)      # Part 3 - Window Defintion
 class MyPlugin:
     def pytest_sessionfinish(self):
         print("*** test run reporting finishing")
+        print(dir(self.pytest_sessionfinish))
+
+    def pytest_runtest_logreport(self, report):
+            print(dir(report))
 
 
 # Display and interact with the Window using an Event Loop
