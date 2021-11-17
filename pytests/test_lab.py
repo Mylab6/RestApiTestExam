@@ -18,7 +18,8 @@ class TestCtaAPI:
     def test_arrival_status_code(self, api_key):
         arrival_resp = self.basic_arrival_request(api_key,40360)
         assert arrival_resp.status_code == 200 
-    def test_arrival_to_Kimble(self,api_key):
+    def test_dest_is_Kimble(self,api_key):
         arrival_resp = self.basic_arrival_request(api_key,40360)
         text = arrival_resp.json()
+        assert text['ctatt']['eta'][0]['destNm'] == "Kimball"
         print(text)
