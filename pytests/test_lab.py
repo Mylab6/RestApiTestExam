@@ -10,16 +10,17 @@ class TestCtaAPI:
     def test_api_key_is_valid(self,api_key):
         # We can only validate for length     
         assert len(api_key) == 32, 'Invalid API key. '
-    def basic_arrival_request(self,api_key,mapid):
-        query_params = {'key':api_key,'max':1,'mapid':mapid, 'outputType':'JSON'}
+    def basic_arrival_request(self,api_key,mapid, numberOfTrains=1 ):
+        query_params = {'key':api_key,'max':numberOfTrains,'mapid':mapid, 'outputType':'JSON'}
         arrival_resp = requests.get(self.base_url,params=query_params)
         return arrival_resp
 
     def test_arrival_status_code(self, api_key):
         arrival_resp = self.basic_arrival_request(api_key,40360)
         assert arrival_resp.status_code == 200 
-    def test_dest_is_Kimble(self,api_key):
-        arrival_resp = self.basic_arrival_request(api_key,40360)
-        text = arrival_resp.json()
-        assert text['ctatt']['eta'][0]['destNm'] == "Kimball"
-        print(text)
+    def test_station_name_is_Southport(self,api_key):
+        arrival_resp = self.basic_arrival_request(api_key,40360, 3)
+        trainResp = arrival_resp.json()
+        for trainArrival in trainResp['ctatt']['eta']:        
+            assert trainArrival['staNm'] == "Southport"
+        print(trainResp)
