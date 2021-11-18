@@ -68,7 +68,7 @@ while True:
         window.refresh()
     if event == "Run Test":
         retcode = pytest.main(
-            [ "-s",  "pytests", "--json-report",  "--api_key", values['api_key'], "--mapid", values['mapid'], "--expected_station_name",values['expected_station_name']  ])       
+            [ "-s",  "pytests", "--json-report",  "--api_key", values['api_key'].strip(), "--mapid", values['mapid'], "--expected_station_name",values['expected_station_name']  ])       
 
       
  
@@ -84,7 +84,7 @@ while True:
             print_to_multi_line("Test: "+ test_result["nodeid"] )
             print_to_multi_line("Result: "+ test_result["outcome"] )      
             if "traceback" in  test_result["call"]:
-                print_to_multi_line("Message: "+ test_result["call"]["traceback"][0]["message"] )
+                print_to_multi_line("Message: "+ test_result["call"]["crash"]["message"] )
 
 
  

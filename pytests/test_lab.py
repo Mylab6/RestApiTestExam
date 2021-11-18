@@ -46,9 +46,6 @@ class TestCtaAPI:
     def test_dynamtic_mapid(self, api_key, mapid, expected_station_name):
         arrival_resp = self.basic_arrival_request(api_key, mapid)
         trainResp = arrival_resp.json()
-        try:
-            first_train = self.get_first_train(trainResp)
-            assert first_train['staNm'] == expected_station_name
-        except:
-            assert False, str(
-                mapid) + ' is not a valid mapid or has no comming arrivals '
+        first_train = self.get_first_train(trainResp)
+        assert first_train['staNm'] == expected_station_name
+
