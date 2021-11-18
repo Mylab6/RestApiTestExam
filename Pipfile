@@ -8,6 +8,7 @@ requests = "*"
 dearpygui = "*"
 pytest = "*"
 pysimplegui = "*"
+pytest-json-report = "*"
 
 [dev-packages]
 autopep8 = "*"

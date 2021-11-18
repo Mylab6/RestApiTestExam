@@ -2,6 +2,7 @@
 #https://github.com/github/gitignore/blob/master/Python.gitignore
 
 # Byte-compiled / optimized / DLL files
+.report.json
 __pycache__/
 *.py[cod]
 *$py.class
