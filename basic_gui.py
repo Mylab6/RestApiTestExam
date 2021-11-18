@@ -2,7 +2,7 @@ import PySimpleGUI as sg
 import pytest
 
 TextSize = (100, 1)
-sg.theme('DarkGrey')
+sg.theme('Black')
 
 layout = [
     [sg.Text("Welcome to my project", size=TextSize)], [sg.Text(
@@ -11,11 +11,10 @@ layout = [
     # add link if time
     # https://www.transitchicago.com/developers/
     [sg.Text("https://www.transitchicago.com/developers/",size=TextSize )],
-    [sg.Text("API Key", size=TextSize)],     # Part 2 - The Layout
-    [sg.Input(key="api_key")],
-    [sg.Input('40360',key="mapid")],
+    [sg.Text("API Key", size=TextSize),sg.Input(key="api_key")],
+    [sg.Text("Mapid", size=TextSize ),sg.Input('40360',key="mapid")],
 
-    [sg.Button('Run Test', size=TextSize )],
+    [sg.Button('Run Test')],
 
 
     # [sg.Output(size=(80, 20))]
@@ -31,7 +30,7 @@ window = sg.Window('CTA Tests Runner', layout)      # Part 3 - Window Defintion
 # Do something with the information gathered
 
 
-class MyPlugin:
+class GetTestResults:
     def pytest_sessionfinish(self):
         return 
         print("*** test run reporting finishing")
@@ -47,7 +46,7 @@ while True:
     # See if user wants to quit or window was closed
     if event == "Run Test":
         retcode = pytest.main(
-            ["-s",  "-x", "pytests", "--api_key", values['api_key'],"--mapid",values['mapid'] ], plugins=[MyPlugin()])
+            ["-s",  "-x", "pytests", "--api_key", values['api_key'],"--mapid",values['mapid'] ], plugins=[GetTestResults()])
         print(vars(retcode))
         window.refresh()
 
