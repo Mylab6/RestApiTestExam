@@ -18,6 +18,8 @@ layout = [
     [sg.Text("Welcome to my project", size=TextSize)], [sg.Text(
         "For this excerise I decided to test the Chicago Transit Authority API", size=TextSize)],
     [sg.Text("Like most APIs, this requires an API key, this can be retrived easily from CTA's website", size=TextSize)],
+    [sg.Text("Make sure you get a train arrivals api key", size=TextSize)],
+
     # add link if time
     # https://www.transitchicago.com/developers/
     [sg.Button(cta_dev_url)],
@@ -75,7 +77,7 @@ while True:
         json_result = json.load(json_file)
 
         dt_object = datetime.fromtimestamp(json_result["created"])
-        print_to_multi_line("Ran at :" +  dt_object)
+        print_to_multi_line("Ran at :" + str( dt_object) )
         for key, val  in json_result["summary"].items():           
             print_to_multi_line(key +" : " +  str(val))
         for test_result in json_result["tests"]:
